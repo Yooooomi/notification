@@ -20,7 +20,7 @@ export class NotificationSender {
     title: string,
     content: string
   ) {
-    await webpush.sendNotification(
+    const result = await webpush.sendNotification(
       {
         endpoint: details.endpoint,
         keys: details.keys,
@@ -28,8 +28,11 @@ export class NotificationSender {
       JSON.stringify({
         title,
         body: content,
-        icon: process.env.NOTIFICATION_ICON,
+        ...(process.env.NOTIFICATION_ICON
+          ? { icon: process.env.NOTIFICATION_ICON }
+          : {}),
       })
     );
+    console.log(result.statusCode, result.body);
   }
 }
