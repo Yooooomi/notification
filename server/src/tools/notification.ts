@@ -27,7 +27,7 @@ export class NotificationSender {
       },
       JSON.stringify({
         title,
-        body: content,
+        content,
         ...(process.env.NOTIFICATION_ICON
           ? { icon: process.env.NOTIFICATION_ICON }
           : {}),
