@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  notification_server:
+    restart: unless-stopped
+    build:
+      context: server
+      dockerfile: Dockerfile.production
+    environment:
+      NOTIFICATION_MAIL: mail@example.org
+      NOTIFICATION_PUBLIC_VAPID_KEY: public_key
+      NOTIFICATION_PRIVATE_VAPID_KEY: private_key
+
+  notification_client:
+    restart: unless-stopped
+    build:
+      context: client
+      dockerfile: Dockerfile.production
+    environment:
+      NOTIFICATION_PUBLIC_VAPID_KEY: public_key
