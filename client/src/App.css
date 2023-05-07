@@ -14,13 +14,13 @@
 
 .App > input {
   width: 200px;
-  margin-bottom: 16px;
   display: block;
   border: 1px solid grey;
   outline: none;
   font-size: unset;
   padding: 8px 4px;
   border-radius: 6px;
+  margin-bottom: 8px;
 }
 
 .App > button {
@@ -33,6 +33,7 @@
   font-size: unset;
   padding: 8px;
   border-radius: 6px;
+  margin-top: 8px;
 }
 
 @media screen and (max-width: 960px) {

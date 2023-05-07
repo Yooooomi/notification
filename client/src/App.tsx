@@ -17,6 +17,7 @@ const NOTIFICATION_PUBLIC_VAPID_KEY = (window as any)
 const API_ENDPOINT = (window as any).API_ENDPOINT;
 
 function App() {
+  const [hasBeenSet, setHasBeenSet] = useState(false);
   const [username, setUsername] = useState("");
 
   const register = useCallback(async () => {
@@ -36,7 +37,7 @@ function App() {
       console.log("No subscription");
       return;
     }
-    fetch(`${API_ENDPOINT}/register`, {
+    await fetch(`${API_ENDPOINT}/register`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -47,7 +48,25 @@ function App() {
         keys: subscription.keys,
       }),
     }).catch(console.error);
+    setHasBeenSet(true);
   }, [username]);
+
+  const test = useCallback(() => {
+    if (!hasBeenSet) {
+      return;
+    }
+    fetch(`${API_ENDPOINT}/notify`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        title: "Titre test",
+        content: "Contenu test",
+      }),
+    }).catch(console.error);
+  }, [hasBeenSet, username]);
 
   return (
     <div className="App">
@@ -60,7 +79,10 @@ function App() {
         value={username}
       />
       <button onClick={register} disabled={!username}>
-        register
+        s&apos;enregistrer
+      </button>
+      <button onClick={test} disabled={!username}>
+        tester
       </button>
     </div>
   );
