@@ -34,6 +34,11 @@
   padding: 8px;
   border-radius: 6px;
   margin-top: 8px;
+  cursor: pointer;
+}
+
+.App > button:active {
+  transform: scale(0.9);
 }
 
 @media screen and (max-width: 960px) {
