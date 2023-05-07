@@ -17,7 +17,7 @@ export class Database {
   }
 
   save() {
-    fs.writeFileSync(Database.path, JSON.stringify(this.db));
+    fs.writeFileSync(Database.path, JSON.stringify(this.db, null, " "));
   }
 
   get(key: string) {

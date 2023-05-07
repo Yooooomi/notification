@@ -23,19 +23,24 @@ app.post("/register", async (req, res) => {
     endpoint,
     keys,
   });
-  console.log(db);
 
   return res.status(204).end();
 });
 
 app.post("/notify", async (req, res) => {
-  const { username, title, content } = req.body;
+  const { username, title, content, context } = req.body;
   const user = db.get(username);
+
   if (!user) {
     return res.status(404).end();
   }
 
-  await notificationSender.sendNotification(user, title, content);
+  await notificationSender.sendNotification(
+    user,
+    title,
+    content,
+    context ?? ""
+  );
 
   return res.status(204).end();
 });

@@ -18,8 +18,11 @@ export class NotificationSender {
   async sendNotification(
     details: NotificationReceiverDetails,
     title: string,
-    content: string
+    content: string,
+    context: string
   ) {
+    const contextIcon = `NOTIFICATION_ICON_${context}`;
+    const icon = process.env[contextIcon] ?? process.env.NOTIFICATION_ICON;
     const result = await webpush.sendNotification(
       {
         endpoint: details.endpoint,
@@ -28,9 +31,7 @@ export class NotificationSender {
       JSON.stringify({
         title,
         content,
-        ...(process.env.NOTIFICATION_ICON
-          ? { icon: process.env.NOTIFICATION_ICON }
-          : {}),
+        ...(icon ? { icon } : {}),
       })
     );
     console.log(result.statusCode, result.body);
