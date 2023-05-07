@@ -49,21 +49,6 @@ function App() {
     }).catch(console.error);
   }, [username]);
 
-  const send = useCallback(() => {
-    if (!username) {
-      return;
-    }
-    fetch(`${API_ENDPOINT}/notify`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-      }),
-    }).catch(console.error);
-  }, [username]);
-
   return (
     <div className="App">
       <input
@@ -74,9 +59,6 @@ function App() {
       />
       <button onClick={register} disabled={!username}>
         register
-      </button>
-      <button onClick={() => setTimeout(send, 3000)} disabled={!username}>
-        send
       </button>
     </div>
   );
