@@ -53,6 +53,8 @@ function App() {
     <div className="App">
       <input
         placeholder="username"
+        autoCapitalize="off"
+        autoCorrect="off"
         width={200}
         onChange={(ev) => setUsername(ev.target.value)}
         value={username}
